@@ -16,12 +16,9 @@ class FlappyBird:
     def run_game(self):
         while True:
             self.check_events()
-            self.bird.move_bird(self.bird_pos)
+            self.bird.move_bird()
             self.update_screen()
             sleep(0.01)
-            while self.bird_pos > 0:
-                self.bird.move_bird()
-            self.bird.bird_direction = 0
 
     def check_events(self):
         for event in pygame.event.get():
@@ -30,7 +27,7 @@ class FlappyBird:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    self.bird.bird_direction = 1
+                    self.bird.start_moving_up()
 
     def update_screen(self):
         self.screen.blit(self.background, (0, 0))
