@@ -11,14 +11,18 @@ class FlappyBird:
 
         pygame.display.set_caption('Flappy Bird')
         self.background = pygame.image.load('Flappy_bird_background.png')
-        self.bird = Bird(self)
+        self.bird1 = Bird(self,1)
+        self.bird2 = Bird(self,2)
+        self.bird3 = Bird(self,3)
 
     def run_game(self):
         while True:
             self.check_events()
-            self.bird.move_bird()
+            self.bird1.move_bird()
+            self.bird2.move_bird()
+            self.bird3.move_bird()
             self.update_screen()
-            sleep(0.01)
+            sleep(0.05)
 
     def check_events(self):
         for event in pygame.event.get():
@@ -27,11 +31,17 @@ class FlappyBird:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    self.bird.start_moving_up()
+                    self.bird1.start_moving_up()
+                elif event.key == pygame.K_SLASH:
+                        self.bird2.start_moving_up()
+                elif event.key == pygame.K_COMMA:
+                    self.bird3.start_moving_up()
 
     def update_screen(self):
         self.screen.blit(self.background, (0, 0))
-        self.bird.draw_bird()
+        self.bird1.draw_bird()
+        self.bird2.draw_bird()
+        self.bird3.draw_bird()
         pygame.display.flip()
 
 if __name__ == '__main__':

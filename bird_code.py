@@ -2,14 +2,14 @@ import pygame
 from  time import sleep
 
 class Bird:
-    def __init__(self, fb_game):
+    def __init__(self, fb_game, counter):
         self.screen = fb_game.screen
         self.screen_rect = self.screen.get_rect()
         self.image = pygame.image.load('bird_image.png')
         self.image_rect = self.image.get_rect()
         self.bird_direction = 0
         self.up_counter = 0
-        self.location = [200, 200]
+        self.location = [200*counter, 200]
 
     def draw_bird(self):
         self.screen.blit(self.image, (self.location))
@@ -19,13 +19,17 @@ class Bird:
             self.location[1] -= 1
             self.up_counter += 1
         else:
+            print("Start Moving down")
             self.up_counter = 0
             self.bird_direction = 0
             self.location[1] += 1
+        return
 
     def start_moving_up(self):
+        print("Start Moving up")
         self.bird_direction = 1
-        self.up_counter = 20
+        self.up_counter = 0
+        return
 
 
 
