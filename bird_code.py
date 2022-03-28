@@ -1,4 +1,5 @@
 import pygame
+from  time import sleep
 
 class Bird:
     def __init__(self, fb_game):
@@ -6,15 +7,27 @@ class Bird:
         self.screen_rect = self.screen.get_rect()
         self.image = pygame.image.load('bird_image.png')
         self.image_rect = self.image.get_rect()
-        self.moving_up = False
+        self.bird_direction = 0
+
+        self.location = [200, 200]
 
     def draw_bird(self):
-        self.screen.blit(self.image, (200, 200))
+        self.screen.blit(self.image, (self.location))
 
     def move_bird(self):
-        if self.moving_up:
-            for n in range(20):
-                self.image_rect.x -= 1
+        self.bird_pos = 1
+        if self.bird_direction == 1:
+            self.location[1] -= 1
+            sleep(0.01)
+            self.draw_bird()
+            self.bird_pos += 1
+            return(self.bird_pos)
+
+        else:
+            self.bird_pos = 0
+            self.location[1] += 1
+            return(0)
+
 
 
 
