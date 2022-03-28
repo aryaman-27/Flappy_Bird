@@ -8,23 +8,24 @@ class Bird:
         self.image = pygame.image.load('bird_image.png')
         self.image_rect = self.image.get_rect()
         self.bird_direction = 0
-
+        self.up_counter = 0
         self.location = [200, 200]
 
     def draw_bird(self):
-        self.screen.blit(self.image, self.location)
+        self.screen.blit(self.image, (self.location))
 
     def move_bird(self):
-        if self.bird_direction == 1:
-            for n in range(20):
-                self.location[1] -= 1
-                sleep(0.01)
-                self.draw_bird()
-                pygame.display.flip()
-
+        if self.bird_direction == 1 and self.up_counter < 20:
+            self.location[1] -= 1
+            self.up_counter += 1
         else:
+            self.up_counter = 0
+            self.bird_direction = 0
             self.location[1] += 1
 
+    def start_moving_up(self):
+        self.bird_direction = 1
+        self.up_counter = 20
 
 
 
