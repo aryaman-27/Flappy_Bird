@@ -13,7 +13,8 @@ class Pillar:
         self.upper_rect.right = 800
         self.lower_rect.right = 800
         self.lower_rect.top = self.lower_pillar_y
-        self.color = (150, 75, 0)
+        self.color = (0, 255, 0)
+        self.border_colour = (0, 100, 0)
 
     def move_left(self):
         self.upper_rect.x -= 1
@@ -21,6 +22,9 @@ class Pillar:
 
     def draw_pillar(self):
         pygame.draw.rect(self.screen, self.color, self.upper_rect)
+        pygame.draw.rect(self.screen, self.border_colour, self.upper_rect, 3)
         pygame.draw.rect(self.screen, self.color, self.lower_rect)
+        pygame.draw.rect(self.screen, self.border_colour, self.lower_rect, 3)
+
 
 
