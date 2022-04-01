@@ -6,16 +6,16 @@ class Pillar:
     def __init__(self, fb_game):
         self.screen = fb_game.screen
         self.screen_rect = self.screen.get_rect()
-        self.upper_pillar_y = random.randint(0, 770)
-        self.lower_pillar_y = self.upper_pillar_y + 30
-        self.upper_rect = pygame.Rect(0, 0, 20, self.upper_pillar_y)
-        self.lower_rect = pygame.Rect(0, 0, 20, 600 - self.lower_pillar_y)
+        self.upper_pillar_y = random.randint(50, 750)
+        self.lower_pillar_y = self.upper_pillar_y + 50
+        self.upper_rect = pygame.Rect(0, 0, 40, self.upper_pillar_y)
+        self.lower_rect = pygame.Rect(0, 0, 40, 600 - self.lower_pillar_y)
         self.upper_rect.right = 800
         self.lower_rect.right = 800
         self.lower_rect.top = self.lower_pillar_y
-        self.color = (255, 255, 0)
+        self.color = (150, 75, 0)
 
-    def update(self):
+    def move_left(self):
         self.upper_rect.x -= 1
         self.lower_rect.x -= 1
 

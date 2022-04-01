@@ -19,7 +19,7 @@ class FlappyBird:
         while True:
             self.check_events()
             self.bird.move_bird()
-            self.pillar.update()
+            self.pillar.move_left()
             self.update_screen()
             sleep(0.01)
 
