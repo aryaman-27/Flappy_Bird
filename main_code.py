@@ -13,13 +13,17 @@ class FlappyBird:
         pygame.display.set_caption('Flappy Bird')
         self.background = pygame.image.load('Flappy_bird_background.png')
         self.bird = Bird(self)
-        self.pillar = Pillar(self)
+        self.pillar = Pillar(self, 1)
+        self.pillar_2 = Pillar(self, 2)
+        self.pillar_3 = Pillar(self,3)
+        self.pillars = [self.pillar, self.pillar_2, self.pillar_3]
 
     def run_game(self):
         while True:
             self.check_events()
             self.bird.move_bird()
-            self.pillar.move_left()
+            for pillar in self.pillars:
+                pillar.move()
             self.update_screen()
             sleep(0.01)
 
@@ -35,7 +39,8 @@ class FlappyBird:
     def update_screen(self):
         self.screen.blit(self.background, (0, 0))
         self.bird.draw_bird()
-        self.pillar.draw_pillar()
+        for pillar in self.pillars:
+            pillar.draw_pillar()
         pygame.display.flip()
 
 if __name__ == '__main__':
