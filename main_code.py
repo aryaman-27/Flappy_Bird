@@ -24,6 +24,9 @@ class FlappyBird:
             self.bird.move_bird()
             for pillar in self.pillars:
                 pillar.move()
+            collision_status = self.pillar.check_collision(self.bird) or self.pillar_2.check_collision(self.bird) or self.pillar_3.check_collision(self.bird)
+            if collision_status:
+                print('colission colission colission')
             self.update_screen()
             sleep(0.01)
 
@@ -42,6 +45,7 @@ class FlappyBird:
         for pillar in self.pillars:
             pillar.draw_pillar()
         pygame.display.flip()
+
 
 if __name__ == '__main__':
     fb = FlappyBird()
