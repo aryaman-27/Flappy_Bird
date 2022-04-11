@@ -6,7 +6,7 @@ class Pillar:
     def __init__(self, fb_game, location_counter):
         self.screen = fb_game.screen
         self.screen_rect = self.screen.get_rect()
-        upper_pillar_y = random.randint(60, 540)
+        upper_pillar_y = random.randint(120, 540)
         lower_pillar_y = upper_pillar_y + 60
         self.upper_rect = pygame.Rect(0, 0, 40, upper_pillar_y)
         self.lower_rect = pygame.Rect(0, 0, 40, 600 - lower_pillar_y)
@@ -30,8 +30,9 @@ class Pillar:
         pygame.draw.rect(self.screen, self.border_colour, self.lower_rect, 3)
 
     def check_collision(self, bird):
-        if self.upper_rect.x <= bird.image_rect.x and self.upper_rect.left == bird.image_rect.y or self.lower_rect.x <= bird.image_rect.x and self.lower_rect.left == bird.image_rect.y:
-
+        if (self.upper_rect.topleft[0] <= bird.location[0] + bird.image_rect.w and (bird.location[1] > self.upper_rect.topleft[1] and bird.location[1] < self.upper_rect.bottomright[1])) or \
+                (self.lower_rect.topleft[0] <= bird.location[0] + bird.image_rect.w and (bird.location[1] > self.lower_rect.topleft[1] and bird.location[1] < self.lower_rect.bottomright[1])):
+            print('collision')
             return True
 
 

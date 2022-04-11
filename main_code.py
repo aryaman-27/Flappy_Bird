@@ -2,7 +2,7 @@ import sys
 
 import pygame
 from  bird_code import Bird
-from pillar_code import  Pillar
+from pillar_code import Pillar
 from  time import sleep
 
 class FlappyBird:
