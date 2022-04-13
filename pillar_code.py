@@ -30,10 +30,11 @@ class Pillar:
         pygame.draw.rect(self.screen, self.border_colour, self.lower_rect, 3)
 
     def check_collision(self, bird):
-        if (self.upper_rect.topleft[0] <= bird.location[0] + bird.image_rect.w and (bird.location[1] > self.upper_rect.topleft[1] and bird.location[1] < self.upper_rect.bottomright[1])) or \
-                (self.lower_rect.topleft[0] <= bird.location[0] + bird.image_rect.w and (bird.location[1] > self.lower_rect.topleft[1] and bird.location[1] < self.lower_rect.bottomright[1])):
-            print('collision')
+        bird_rect = pygame.Rect(bird.location[0], bird.location[1],bird.image_rect.w, bird.image_rect.h)
+        if (self.upper_rect.colliderect(bird_rect) or self.lower_rect.colliderect(bird_rect)):
             return True
+        else:
+            return False
 
 
 
