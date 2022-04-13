@@ -13,9 +13,9 @@ class FlappyBird:
         pygame.display.set_caption('Flappy Bird')
         self.background = pygame.image.load('Flappy_bird_background.png')
         self.bird = Bird(self)
-        self.pillar = Pillar(self, 1)
-        self.pillar_2 = Pillar(self, 2)
-        self.pillar_3 = Pillar(self,3)
+        self.pillar = Pillar(self, 2)
+        self.pillar_2 = Pillar(self, 3)
+        self.pillar_3 = Pillar(self,4)
         self.pillars = [self.pillar, self.pillar_2, self.pillar_3]
 
     def run_game(self):
@@ -26,7 +26,8 @@ class FlappyBird:
                 pillar.move()
             collision_status = self.pillar.check_collision(self.bird) or self.pillar_2.check_collision(self.bird) or self.pillar_3.check_collision(self.bird)
             if collision_status:
-                print('colission colission colission')
+                sleep(0.5)
+                self.initalise_game()
             self.update_screen()
             sleep(0.01)
 
@@ -38,6 +39,15 @@ class FlappyBird:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.bird.start_moving_up()
+
+    def initalise_game(self):
+        self.bird.image_rect.topleft = self.bird.initial_location
+        self.pillar.upper_rect.right = 275 * 2
+        self.pillar.lower_rect.right = 275 * 2
+        self.pillar_2.upper_rect.right = 275 * 3
+        self.pillar_2.lower_rect.right = 275 * 3
+        self.pillar_3.upper_rect.right = 275 * 4
+        self.pillar_3.lower_rect.right = 275 * 4
 
     def update_screen(self):
         self.screen.blit(self.background, (0, 0))
