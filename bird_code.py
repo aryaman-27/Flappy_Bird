@@ -11,6 +11,7 @@ class Bird:
         self.up_counter = 0
         self.initial_location = [200, 200]
         self.location = [200, 200]
+        self.bird_out_of_screen = False
 
     def draw_bird(self):
         self.screen.blit(self.image, (self.location))
@@ -35,5 +36,10 @@ class Bird:
         self.up_counter = 0
         return
 
+    def bird_detect(self):
+        if self.location[1] >= self.screen_rect.bottom or self.location[1] <= self.screen_rect.top:
+            self.bird_out_of_screen = True
 
+    def reset_bird(self):
+        self.location[1] = self.initial_location[1]
 

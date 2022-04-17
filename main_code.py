@@ -3,6 +3,7 @@ import sys
 import pygame
 from  bird_code import Bird
 from pillar_code import Pillar
+from play_button import Button
 from  time import sleep
 
 class FlappyBird:
@@ -13,6 +14,7 @@ class FlappyBird:
         pygame.display.set_caption('Flappy Bird')
         self.background = pygame.image.load('Flappy_bird_background.png')
         self.bird = Bird(self)
+        #self.play_button = Button(self, 'play')
         self.pillar = Pillar(self, 2)
         self.pillar_2 = Pillar(self, 3)
         self.pillar_3 = Pillar(self,4)
@@ -22,12 +24,13 @@ class FlappyBird:
         while True:
             self.check_events()
             self.bird.move_bird()
+            self.bird.bird_detect()
             for pillar in self.pillars:
                 pillar.move()
             collision_status = self.pillar.check_collision(self.bird) or self.pillar_2.check_collision(self.bird) or self.pillar_3.check_collision(self.bird)
-            if collision_status:
+            if collision_status or self.bird.bird_out_of_screen:
                 sleep(0.5)
-                self.initalise_game()
+                self.reset_game()
             self.update_screen()
             sleep(0.01)
 
@@ -40,14 +43,11 @@ class FlappyBird:
                 if event.key == pygame.K_SPACE:
                     self.bird.start_moving_up()
 
-    def initalise_game(self):
-        self.bird.image_rect.topleft = self.bird.initial_location
-        self.pillar.upper_rect.right = 275 * 2
-        self.pillar.lower_rect.right = 275 * 2
-        self.pillar_2.upper_rect.right = 275 * 3
-        self.pillar_2.lower_rect.right = 275 * 3
-        self.pillar_3.upper_rect.right = 275 * 4
-        self.pillar_3.lower_rect.right = 275 * 4
+    def reset_game(self):
+        self.bird.reset_bird()
+        for pillar in self.pillars:
+            pillar.set_initial_location()
+        self.bird.bird_out_of_screen = False
 
     def update_screen(self):
         self.screen.blit(self.background, (0, 0))
